@@ -67,9 +67,12 @@ def bball_stats_game():
 	def players_per_team():
 		per_team = len(player_data) / len(new_teams)
 		return (int(per_team))
-	"""functin that creates a new key-value team pair for each player . Honestly 
-	I don't really like it. It's clunky and feels like it could be DRYer and more Pythonic
-	I kinda got stuck and this is what I came up with
+	"""function that appends a set range, using scile not range, to append player names 
+	to a list so they can be printed in the proper style according to instructions
+	if more teams or players are added you will need to update the teams variables at
+	the top of the program(if more teams are added) if more players are added you will need 
+	to adjust your slice based on players_per_team function. I feel like there is probably
+	a cleaner way of doing this.  
 	"""
 	def balance_teams(teams, players):
 		for player in players[:6]:
@@ -125,3 +128,4 @@ def bball_stats_game():
 				break
 
 bball_stats_game()
+
