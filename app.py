@@ -5,6 +5,7 @@ import copy
 # copy from https://www.geeksforgeeks.org/copy-python-deep-copy-shallow-copy/
 
 def basketball_stats():
+	# variables
 	new_teams = copy.deepcopy(constants.TEAMS)
 	player_data = copy.deepcopy(constants.PLAYERS)
 	pick_team = ''
