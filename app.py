@@ -1,9 +1,12 @@
-import constants
 
-def bball_stats_game():
-	# global variables
-	new_teams = []
-	player_data = []
+import constants
+import copy
+
+# copy from https://www.geeksforgeeks.org/copy-python-deep-copy-shallow-copy/
+
+def basketball_stats():
+	new_teams = copy.deepcopy(constants.TEAMS)
+	player_data = copy.deepcopy(constants.PLAYERS)
 	pick_team = ''
 	team1 = []
 	team2 = []
@@ -38,35 +41,30 @@ def bball_stats_game():
 						height['height'] = int(height['height'])
 	"""
 	def clean_data():
-		for items in constants.PLAYERS:
-			player_data.append(items)
 		for tallness in player_data:
 			tallness['height'] = tallness['height'][:3]
 			tallness['height'] = int(tallness['height'])
-		for xper in player_data:
-			if xper['experience'] == 'NO':
-				xper['experience'] = False
-			if xper['experience'] == 'YES':
-				xper['experience'] = True
+		for exp in player_data:
+			if exp['experience'] == 'NO':
+				exp['experience'] = False
+			if exp['experience'] == 'YES':
+				exp['experience'] = True
 		return player_data
 
 	clean_data()
 
-	def team_names():
-		for i in constants.TEAMS:
-			new_teams.append(i)
-		return new_teams
-	team_names()
-# function that prints out each team name in a specific format
+	# function that prints out each team name in a specific format I like numbers
+	# more than letters feels cleaner for some reason.
 	def print_teams():
 		counter = 1
 		for i in new_teams:
 			print(f'{counter}: {i}')
 			counter += 1
-# function that gives the number of players per team as an integer
+	# function that gives the number of players per team as an integer
 	def players_per_team():
 		per_team = len(player_data) / len(new_teams)
 		return (int(per_team))
+	players_per_team()
 	"""function that appends a set range, using scile not range, to append player names 
 	to a list so they can be printed in the proper style according to instructions
 	if more teams or players are added you will need to update the teams variables at
@@ -77,21 +75,22 @@ def bball_stats_game():
 	def balance_teams(teams, players):
 		for player in players[:6]:
 			team1.append(player['name'])
-		
+
 		for player in players[6:12]:
 			team2.append(player['name'])
 		
 		for player in players[12:]:
 			team3.append(player['name'])
 		return player
-# basketball stats program.
+
 	balance_teams(new_teams, player_data)
-	players_per_team()
+	# basketball stats program.
+
 
 	opening_display()
 	enter_option = input("Enter Option A or B: ")
 	enter_option = enter_option.lower()
-	
+
 	while enter_option != 'a' or enter_option != 'b':
 		if enter_option == 'b':
 			print("Program Ending")
@@ -106,26 +105,26 @@ def bball_stats_game():
 			enter_option = enter_option.lower()
 
 		if pick_team == "1":
-			print(f"\n \n{new_teams[0]} total players: {players_per_team()}")
+			print(f"\n \n{new_teams[0]} total players: {players_per_team()} \n")
 			print(", ".join(team1))
 			proceed = input("\n \nPress enter to continue or enter 'quit' to end program... ")
 			proceed = proceed.lower()
 			if proceed == "quit":
 				break
 		elif pick_team == "2":
-			print(f" \n \n{new_teams[1]} total players: {players_per_team()}")
+			print(f" \n \n{new_teams[1]} total players: {players_per_team()} \n")
 			print(", ".join(team2))
 			proceed = input("\n \nPress enter to continuer enter 'quit' to end program... ")
 			proceed = proceed.lower()
 			if proceed == "quit":
 				break
 		elif pick_team == "3":
-			print(f"\n\n{new_teams[2]} total players: {players_per_team()}")
+			print(f"\n\n{new_teams[2]} total players: {players_per_team()} \n")
 			print(", ".join(team3))
 			proceed = input("\n \nPress enter to continuer enter 'quit' to end program... ")
 			proceed = proceed.lower()
 			if proceed == "quit":
 				break
 
-bball_stats_game()
-
+if __name__ == "__main__":
+	basketball_stats()
